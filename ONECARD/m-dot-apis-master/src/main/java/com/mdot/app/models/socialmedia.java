@@ -14,6 +14,7 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+
 import com.mdot.app.models.audit.DateAudit;
 
 import lombok.Getter;
@@ -22,12 +23,12 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "projects", uniqueConstraints = { @UniqueConstraint(columnNames = { }), })
+@Table(name = "socialmedia", uniqueConstraints = { @UniqueConstraint(columnNames = { }), })
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-public class project extends DateAudit {
+public class socialmedia extends DateAudit {
 
 	private static final long serialVersionUID = -8361939544099438297L;
 
@@ -37,20 +38,37 @@ public class project extends DateAudit {
 
 	@NotBlank
 	@Size(max = 30)
-	@Column(name = "title", nullable = false)
-	private String title;
+	@Column(name = "instagram", nullable = false)
+	private String instagram;
 
     @Size(max = 200)
-	@Column(name = "image", nullable = true)
-	private String image = "";
+	@Column(name = "facebook", nullable = true)
+	private String facebook;
 
 
     
     @Size(max = 200)
-	@Column(name = "descriptiopn", nullable = true)
-	private String description;
+	@Column(name = "twitter", nullable = true)
+	private String twitter;
+
+    @Size(max = 200)
+	@Column(name = "snapchat", nullable = true)
+	private String snapchat;
+
+    @Size(max = 200)
+	@Column(name = "linkedin", nullable = true)
+	private String linkedin;
+
+    @Size(max = 200)
+	@Column(name = "pinterest", nullable = true)
+	private String pinterest;
+
+
+    @Size(max = 200)
+	@Column(name = "twitch", nullable = true)
+	private String twitch;
     
-    
+ 
     
 
 }
