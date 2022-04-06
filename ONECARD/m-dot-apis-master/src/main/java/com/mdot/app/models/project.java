@@ -22,12 +22,12 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "projects", uniqueConstraints = { @UniqueConstraint(columnNames = { }), })
+@Table(name = "Project", uniqueConstraints = { @UniqueConstraint(columnNames = { }), })
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-public class project extends DateAudit {
+public class Project extends DateAudit {
 
 	private static final long serialVersionUID = -8361939544099438297L;
 
