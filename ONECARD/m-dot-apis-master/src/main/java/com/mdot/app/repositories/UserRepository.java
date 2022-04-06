@@ -10,9 +10,13 @@ import com.mdot.app.models.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-	boolean existsByUsername(String name);
+	//boolean existsByUsername(String name);
 
-	boolean existsByPhone(String phone);
+	//boolean findByPhone(String phone);
+
+	Optional<User> findByPhone(String phone);
+
+	Optional<User> findByEmail(String email);
 
 	boolean existsByEmail(String email);
 
