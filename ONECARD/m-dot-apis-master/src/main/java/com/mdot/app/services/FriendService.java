@@ -6,6 +6,8 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import com.mdot.app.models.Friend;
+import com.mdot.app.models.RecordStatus;
+import com.mdot.app.models.WideRecordStatus;
 import com.mdot.app.payloads.requests.FriendRequest;
 import com.mdot.app.payloads.responses.ApiResponse;
 import com.mdot.app.repositories.FriendRepository;
@@ -34,7 +36,7 @@ public class FriendService {
 			
 		
 		
-			//user.setStatus(WideRecordStatus.ACTIVE);
+			friend.setStatus(WideRecordStatus.ACTIVE);
 			
 
 			return new ResponseEntity<>(new ApiResponse(true, "Saved successfully", friend), HttpStatus.OK);
@@ -53,7 +55,7 @@ public class FriendService {
 				return new ResponseEntity<>(new ApiResponse(false, "Item not found"), HttpStatus.BAD_REQUEST);
 
 			
-			//project.get().setStatus(RecordStatus.ACTIVE);
+			friend.get().setStatus(WideRecordStatus.ACTIVE);
 
 			return new ResponseEntity<>(
 					new ApiResponse(true, "Updated successfully", this.friendRepository.save(friend.get())),

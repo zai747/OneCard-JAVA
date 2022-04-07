@@ -5,12 +5,10 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
-import com.mdot.app.models.Project;
 import com.mdot.app.models.Socialmedia;
-import com.mdot.app.payloads.requests.ProjectRequest;
+import com.mdot.app.models.WideRecordStatus;
 import com.mdot.app.payloads.requests.SocialmediaRequest;
 import com.mdot.app.payloads.responses.ApiResponse;
-import com.mdot.app.repositories.ProjectRepository;
 import com.mdot.app.repositories.SocialMediaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +39,7 @@ public class SocialmediaService {
             socialmedia.setLinkedin(socialmediaRequest.getLinkedin());
             socialmedia.setPinterest(socialmediaRequest.getPinterest());
             socialmedia.setTwitch(socialmediaRequest.getTwitch());
-		
-		
-			//user.setStatus(WideRecordStatus.ACTIVE);
+			socialmedia.setStatus(WideRecordStatus.ACTIVE);
 			
 
 			return new ResponseEntity<>(new ApiResponse(true, "Saved successfully", socialmedia), HttpStatus.OK);
@@ -69,7 +65,7 @@ public class SocialmediaService {
                 socialmedia.get().setLinkedin(socialmediaRequest.getLinkedin());
                 socialmedia.get().setPinterest(socialmediaRequest.getPinterest());
                 socialmedia.get().setTwitch(socialmediaRequest.getTwitch());
-			//project.get().setStatus(RecordStatus.ACTIVE);
+			    socialmedia.get().setStatus(WideRecordStatus.ACTIVE);
 
 			return new ResponseEntity<>(
 					new ApiResponse(true, "Updated successfully", this.socialmediaRepository.save(socialmedia.get())),

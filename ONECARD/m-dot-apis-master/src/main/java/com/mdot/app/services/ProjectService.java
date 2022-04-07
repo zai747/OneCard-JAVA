@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import com.mdot.app.models.Project;
+import com.mdot.app.models.WideRecordStatus;
 import com.mdot.app.payloads.requests.ProjectRequest;
 import com.mdot.app.payloads.responses.ApiResponse;
 import com.mdot.app.repositories.ProjectRepository;
@@ -34,9 +35,8 @@ public class ProjectService {
 			project.setTitle(projectRequest.getTitle());
 			project.setImage(projectRequest.getImage());
 			project.setDescription(projectRequest.getDescription());
-		
-		
-			//user.setStatus(WideRecordStatus.ACTIVE);
+	
+		    project.setStatus(WideRecordStatus.ACTIVE);
 			
 
 			return new ResponseEntity<>(new ApiResponse(true, "Saved successfully", project), HttpStatus.OK);
@@ -57,7 +57,7 @@ public class ProjectService {
 			project.get().setTitle(projectRequest.getTitle());
 			project.get().setImage(projectRequest.getImage());
 			project.get().setDescription(projectRequest.getDescription());
-			//project.get().setStatus(RecordStatus.ACTIVE);
+			project.get().setStatus(WideRecordStatus.ACTIVE);
 
 			return new ResponseEntity<>(
 					new ApiResponse(true, "Updated successfully", this.projectRepository.save(project.get())),

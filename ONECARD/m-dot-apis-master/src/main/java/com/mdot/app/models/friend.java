@@ -3,6 +3,8 @@ package com.mdot.app.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,7 +42,9 @@ public class Friend extends DateAudit {
     @JoinColumn(name = "user", nullable = true)
     private User user;
 
-	@Column(name = "status", nullable = true)
-	private String status;
+	@Column(name = "status", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private WideRecordStatus status = WideRecordStatus.ACTIVE;
+
 
 }
