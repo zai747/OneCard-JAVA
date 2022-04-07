@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.mdot.app.models.Friend;
 
-public interface FriendRepositry extends JpaRepository<Friend, Long> {
+public interface FriendRepository extends JpaRepository<Friend, Long> {
 
 	
 }
