@@ -68,7 +68,8 @@ public class Socialmedia extends DateAudit {
 	@Column(name = "twitch", nullable = true)
 	private String twitch;
     
- 
+    @Column(name = "status", nullable = true)
+	private String status;
     
 
 }

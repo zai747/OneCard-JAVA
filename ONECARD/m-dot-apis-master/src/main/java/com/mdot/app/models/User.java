@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -51,9 +53,6 @@ public class User extends DateAudit {
 	@Size(max = 100)
 	@Column(name = "password", nullable = false)
 	private String password;
-
-	
-
 	
 
 	@Size(max = 40)
@@ -89,8 +88,9 @@ public class User extends DateAudit {
 
 
 
-	@Column(name = "status", nullable = true)
-	private String status;
+	@Column(name = "status", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private WideRecordStatus status = WideRecordStatus.ACTIVE;
 
 	
 	@Column(name = "projects", nullable = true)

@@ -12,8 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+
 
 import com.mdot.app.models.audit.DateAudit;
 
@@ -40,5 +39,8 @@ public class Friend extends DateAudit {
     @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "user", nullable = true)
     private User user;
+
+	@Column(name = "status", nullable = true)
+	private String status;
 
 }

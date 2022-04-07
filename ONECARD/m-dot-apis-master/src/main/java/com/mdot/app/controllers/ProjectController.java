@@ -3,14 +3,12 @@ package com.mdot.app.controllers;
 import javax.validation.Valid;
 
 import com.mdot.app.payloads.requests.ProjectRequest;
-import com.mdot.app.payloads.requests.ProjectUpdateRequest;
-import com.mdot.app.payloads.responses.ApiResponse;
+
 import com.mdot.app.securities.CurrentUser;
 import com.mdot.app.securities.UserPrincipal;
 import com.mdot.app.services.ProjectService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -12,8 +12,10 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.mdot.app.models.RecordStatus;
 import com.mdot.app.models.RoleName;
 import com.mdot.app.models.User;
+import com.mdot.app.models.WideRecordStatus;
 import com.mdot.app.payloads.requests.UserRequest;
 import com.mdot.app.payloads.requests.UserUpdateRequest;
 import com.mdot.app.payloads.responses.ApiResponse;
@@ -60,8 +62,7 @@ public class UserService {
 			user.setDescription(userRequest.getDescription());
 			user.setUsermedia(userRequest.getUsermedia());
 			user.setProjects(userRequest.getProjects());
-		
-			//user.setStatus(WideRecordStatus.ACTIVE);
+			user.setStatus(WideRecordStatus.ACTIVE);
 			
 
 			return new ResponseEntity<>(new ApiResponse(true, "Saved successfully", user), HttpStatus.OK);
@@ -165,7 +166,8 @@ public ResponseEntity<?> listByUsername(String username) {
 				user.get().setUsermedia(userRequest.getUsermedia());
 				user.get().setProjects(userRequest.getProjects());
 				user.get().setProfileimage(userRequest.getProfileimage());
-				//user.get().setStatus(WideRecordStatus.ACTIVE);
+				user.get().setStatus(WideRecordStatus.ACTIVE);
+
 			
 				return new ResponseEntity<>(
 						new ApiResponse(true, "Updated successfully", this.userRepository.save(user.get())),
@@ -192,7 +194,30 @@ public ResponseEntity<?> listByUsername(String username) {
 		}
 
 	}
+
+@Transactional
+public ResponseEntity<?> listByStatus(long id, String status) {
+	try {
+		RecordStatus recordStatus = RecordStatus.ACTIVE;
+
+		switch (status) {
+			case "INACTIVE":
+				recordStatus = RecordStatus.INACTIVE;
+				break;
+			case "DELETED":
+				recordStatus = RecordStatus.DELETED;
+				break;
+			default:
+				recordStatus = RecordStatus.ACTIVE;
+				break;
+		}
+
+		List<User> list = this.userRepository.findByStatusAndEnabled(id, recordStatus);
+		return new ResponseEntity<>(new ApiResponse(true, "", list), HttpStatus.OK);
+	} catch (Exception e) {
+		return new ResponseEntity<>(new ApiResponse(false, e.toString()), HttpStatus.BAD_REQUEST);
+	}
 	
-}
+}}
 
 	

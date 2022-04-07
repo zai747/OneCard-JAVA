@@ -54,4 +54,7 @@ public class Project extends DateAudit {
     @JoinColumn(name = "user", nullable = true)
     private User user;
 
+	@Column(name = "status", nullable = true)
+	private String status;
+
 }

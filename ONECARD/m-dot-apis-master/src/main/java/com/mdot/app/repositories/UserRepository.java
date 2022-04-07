@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.mdot.app.models.RecordStatus;
 import com.mdot.app.models.Role;
 import com.mdot.app.models.User;
 
@@ -31,5 +32,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	List<User> findByRolesAndEnabledAndPhoneContaining(Role role, boolean b, String phone);
 
 	Optional<User> findById(long id);
+
+    List<User> findByStatusAndEnabled(long id, RecordStatus recordStatus);
 
 }

@@ -4,13 +4,11 @@ import javax.validation.Valid;
 
 import com.mdot.app.payloads.requests.UserRequest;
 import com.mdot.app.payloads.requests.UserUpdateRequest;
-import com.mdot.app.payloads.responses.ApiResponse;
 import com.mdot.app.securities.CurrentUser;
 import com.mdot.app.securities.UserPrincipal;
 import com.mdot.app.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -79,10 +77,10 @@ public class UserController {
         return ResponseEntity.ok(this.userService.listByEmail(email));
     }
 
-  /*  @GetMapping("/category/{id}/status/{status}")
-    public ResponseEntity<?> listByCategoryAndStatus(@CurrentUser UserPrincipal currentuser,
+   @GetMapping("/{id}/status/{status}")
+    public ResponseEntity<?> listByStatus(@CurrentUser UserPrincipal currentuser,
             @PathVariable("id") long id, @PathVariable("status") String status) {
-        return ResponseEntity.ok(this.userService.listByCategoryAndStatus(id, status));
-    }*/
+        return ResponseEntity.ok(this.userService.listByStatus(id, status));
+    }
 
 }
