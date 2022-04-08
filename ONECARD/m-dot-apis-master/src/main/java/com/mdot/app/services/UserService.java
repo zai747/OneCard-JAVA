@@ -62,7 +62,7 @@ public class UserService {
 			user.setDescription(userRequest.getDescription());
 			user.setUsermedia(userRequest.getUsermedia());
 			user.setProjects(userRequest.getProjects());
-			user.setStatus(WideRecordStatus.ACTIVE);
+			user.setStatus(RecordStatus.ACTIVE);
 			
 
 			return new ResponseEntity<>(new ApiResponse(true, "Saved successfully", user), HttpStatus.OK);
@@ -166,7 +166,7 @@ public ResponseEntity<?> listByUsername(String username) {
 				user.get().setUsermedia(userRequest.getUsermedia());
 				user.get().setProjects(userRequest.getProjects());
 				user.get().setProfileimage(userRequest.getProfileimage());
-				user.get().setStatus(WideRecordStatus.ACTIVE);
+				user.get().setStatus(RecordStatus.ACTIVE);
 
 			
 				return new ResponseEntity<>(

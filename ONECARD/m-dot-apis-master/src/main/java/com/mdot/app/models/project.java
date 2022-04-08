@@ -58,6 +58,6 @@ public class Project extends DateAudit {
 
 	@Column(name = "status", nullable = false)
 	@Enumerated(EnumType.STRING)
-	private WideRecordStatus status = WideRecordStatus.ACTIVE;
+	private RecordStatus status = RecordStatus.ACTIVE;
 
 }

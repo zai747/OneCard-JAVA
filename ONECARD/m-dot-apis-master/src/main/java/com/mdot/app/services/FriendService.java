@@ -33,10 +33,8 @@ public class FriendService {
 			Friend friend = new Friend();
 
 			friend.setId((long) 0);
-			
 		
-		
-			friend.setStatus(WideRecordStatus.ACTIVE);
+			friend.setStatus(RecordStatus.ACTIVE);
 			
 
 			return new ResponseEntity<>(new ApiResponse(true, "Saved successfully", friend), HttpStatus.OK);
@@ -55,7 +53,7 @@ public class FriendService {
 				return new ResponseEntity<>(new ApiResponse(false, "Item not found"), HttpStatus.BAD_REQUEST);
 
 			
-			friend.get().setStatus(WideRecordStatus.ACTIVE);
+			friend.get().setStatus(RecordStatus.ACTIVE);
 
 			return new ResponseEntity<>(
 					new ApiResponse(true, "Updated successfully", this.friendRepository.save(friend.get())),
