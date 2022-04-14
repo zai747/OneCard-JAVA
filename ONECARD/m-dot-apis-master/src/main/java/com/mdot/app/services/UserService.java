@@ -15,7 +15,6 @@ import javax.validation.Valid;
 import com.mdot.app.models.RecordStatus;
 import com.mdot.app.models.RoleName;
 import com.mdot.app.models.User;
-import com.mdot.app.models.WideRecordStatus;
 import com.mdot.app.payloads.requests.UserRequest;
 import com.mdot.app.payloads.requests.UserUpdateRequest;
 import com.mdot.app.payloads.responses.ApiResponse;
@@ -63,7 +62,7 @@ public class UserService {
 			user.setUsermedia(userRequest.getUsermedia());
 			user.setProjects(userRequest.getProjects());
 			user.setStatus(RecordStatus.ACTIVE);
-			
+			user = this.userRepository.save(user);
 
 			return new ResponseEntity<>(new ApiResponse(true, "Saved successfully", user), HttpStatus.OK);
 		} catch (Exception e) {

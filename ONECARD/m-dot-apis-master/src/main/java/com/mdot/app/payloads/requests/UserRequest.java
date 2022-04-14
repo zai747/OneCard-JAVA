@@ -12,16 +12,17 @@ public class UserRequest {
     private String password;
     private String status;
 
-    private String firstname;
-    private String lastname;
+   /*private String firstname;
+    private String lastname;*/
  
-    private String Profileimage;
-    private String Jobtitle;
+    private String jobtitle;
 
-    private String Usermedia;
-    private String Projects;
+    private String usermedia;
+    private String projects;
 
     private String description;
+
+    private String profileimage;
  
 
 }

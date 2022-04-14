@@ -74,17 +74,17 @@ public class User extends DateAudit {
 	@Column(name = "enabled", nullable = false)
 	private boolean enabled = true;
 
-	@Size(max = 15)
+	@Size(max = 250)
 	@Column(name = "description", nullable = false)
-	private String description;
+	private String description ="";
 
-	@Size(max = 15)
+	@Size(max = 250)
 	@Column(name = "jobtitle", nullable = false)
-	private String jobtitle;
+	private String jobtitle ="";
 
 	@Size(max = 15)
 	@Column(name = "usermedia", nullable = false)
-	private String usermedia;
+	private String usermedia ="";
 
 
 

@@ -63,12 +63,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.antMatchers("/api/auth/signin", "/api/auth/signin/app", "/api/user/save","/api/user/usersave", "/api/auth/signup","/api/auth/signup/pos","/api/file/image/**",
 						"/api/auth/register/app", "/api/auth/isexist/**", "/api/auth/forgotpassword", "/api/auth/forgotpassword/app",
-						"/api/auth/resetpassword", "/api/auth/validateToken","/api/auth/login")
+						"/api/auth/resetpassword", "/api/auth/validateToken","/api/auth/login","/api/auth/register","/api/project","/api/user/{id}")
 				.permitAll().antMatchers("/api/user/checkAvailability/username", "/api/user/checkAvailability/email")
 				.permitAll().antMatchers(HttpMethod.GET, "/api/category/public/**", "/api/stock/public/**", "/api/user/show/image/**", "/api/product/suggest/**", "/api/postcode/**").permitAll()
 				.antMatchers("/api/users/validateToken*", "/api/users/savePassword*")
 				.hasAuthority("CHANGE_PASSWORD_PRIVILEGE").anyRequest().authenticated();
 		// Add our custom JWT security filter
 		http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-	}
+	}  
 }
