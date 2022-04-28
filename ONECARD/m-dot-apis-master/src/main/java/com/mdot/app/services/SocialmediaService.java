@@ -5,11 +5,15 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.mdot.app.models.RecordStatus;
 import com.mdot.app.models.Socialmedia;
+import com.mdot.app.models.User;
 import com.mdot.app.payloads.requests.SocialmediaRequest;
 import com.mdot.app.payloads.responses.ApiResponse;
 import com.mdot.app.repositories.SocialMediaRepository;
+import com.mdot.app.repositories.UserRepository;
+import com.mdot.app.securities.UserPrincipal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,13 +29,22 @@ public class SocialmediaService {
 	@Autowired
 	private SocialMediaRepository socialmediaRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     
 	@Transactional
-	public ResponseEntity<?> save(@Valid SocialmediaRequest socialmediaRequest) {
+	public ResponseEntity<?> save(@Valid SocialmediaRequest socialmediaRequest,long id) {
 		try {
+
 			Socialmedia socialmedia = new Socialmedia();
 
+            Optional<User> user = userRepository.findById(id);
+            if (!user.isPresent())
+				return new ResponseEntity<>(new ApiResponse(false, "Item not found"), HttpStatus.BAD_REQUEST);              
+
 			socialmedia.setId((long) 0);
+            socialmedia.setUser(user.get());
 			socialmedia.setInstagram(socialmediaRequest.getInstagram());
 			socialmedia.setFacebook(socialmediaRequest.getFacebook());
             socialmedia.setTwitter(socialmediaRequest.getTwitter());
@@ -40,7 +53,8 @@ public class SocialmediaService {
             socialmedia.setPinterest(socialmediaRequest.getPinterest());
             socialmedia.setTwitch(socialmediaRequest.getTwitch());
 			socialmedia.setStatus(RecordStatus.ACTIVE);
-			
+            socialmedia = this.socialmediaRepository.save(socialmedia);
+
 
 			return new ResponseEntity<>(new ApiResponse(true, "Saved successfully", socialmedia), HttpStatus.OK);
 		} catch (Exception e) {

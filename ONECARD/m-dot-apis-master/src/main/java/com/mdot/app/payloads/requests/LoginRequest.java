@@ -17,4 +17,8 @@ public class LoginRequest {
 	
 	private String fcmId;
 
+	
+	@NotBlank
+	private String phone;
+
 }

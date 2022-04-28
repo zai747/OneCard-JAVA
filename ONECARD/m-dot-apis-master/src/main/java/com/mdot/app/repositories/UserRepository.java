@@ -35,6 +35,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	Optional<User> findById(long id);
 
-    List<User> findByStatusAndEnabled(long id, RecordStatus recordStatus);
+
+    List<User> findByStatusAndEnabled(RecordStatus recordStatus, boolean b);
 
 }

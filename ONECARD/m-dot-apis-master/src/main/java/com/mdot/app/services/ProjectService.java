@@ -7,10 +7,11 @@ import javax.validation.Valid;
 
 import com.mdot.app.models.Project;
 import com.mdot.app.models.RecordStatus;
-import com.mdot.app.models.WideRecordStatus;
+import com.mdot.app.models.User;
 import com.mdot.app.payloads.requests.ProjectRequest;
 import com.mdot.app.payloads.responses.ApiResponse;
 import com.mdot.app.repositories.ProjectRepository;
+import com.mdot.app.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,24 +27,31 @@ public class ProjectService {
 	@Autowired
 	private ProjectRepository projectRepository;
 
+	@Autowired
+	private UserRepository userRepository;
+
     
 	@Transactional
-	public ResponseEntity<?> save(@Valid ProjectRequest projectRequest) {
+	public ResponseEntity<?> save(long id, String title, String description) {
 		try {
+
+			Optional<User> user = userRepository.findById(id);
+
+			if (!user.isPresent())
+				return new ResponseEntity<>(new ApiResponse(false, "Item not found"), HttpStatus.BAD_REQUEST);
+
 			Project project = new Project();
 
 			project.setId((long) 0);
-			project.setTitle(projectRequest.getTitle());
-			project.setImage(projectRequest.getImage());
-			project.setDescription(projectRequest.getDescription());
-	
-		    project.setStatus(RecordStatus.ACTIVE);
-			
+			project.setUser(user.get());
+			project.setTitle(title);
+			project.setDescription(description);
+			project = this.projectRepository.save(project);
 
 			return new ResponseEntity<>(new ApiResponse(true, "Saved successfully", project), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(new ApiResponse(false, e.toString()), HttpStatus.BAD_REQUEST);
-		}		
+		}
 
 	}
 
@@ -93,6 +101,23 @@ public ResponseEntity<?> listById(long id) {
         return new ResponseEntity<>(new ApiResponse(false, e.toString()), HttpStatus.BAD_REQUEST);
     }
 }
+
+
+@Transactional
+public ResponseEntity<?> listByUserId(long user_id) {
+    try {
+        Optional<Project> project = this.projectRepository.findByUser(user_id);
+
+        if (!project.isPresent())
+            return new ResponseEntity<>(new ApiResponse(false, "Item not found"), HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>(new ApiResponse(true, "", project), HttpStatus.OK);
+    } catch (Exception e) {
+        return new ResponseEntity<>(new ApiResponse(false, e.toString()), HttpStatus.BAD_REQUEST);
+    }
+}
+
+
 }
 
 

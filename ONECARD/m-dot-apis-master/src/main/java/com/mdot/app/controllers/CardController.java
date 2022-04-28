@@ -2,11 +2,10 @@ package com.mdot.app.controllers;
 
 import javax.validation.Valid;
 
-
-import com.mdot.app.payloads.requests.SocialmediaRequest;
+import com.mdot.app.payloads.requests.CardRequest;
 import com.mdot.app.securities.CurrentUser;
 import com.mdot.app.securities.UserPrincipal;
-import com.mdot.app.services.SocialmediaService;
+import com.mdot.app.services.CardService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,32 +19,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/api/socialmedia")
-public class SocialmediaController {
+@RequestMapping(path = "/api/card")
+public class CardController {
     @Autowired
-    private SocialmediaService socialmediaService;
+    private CardService cardService;
 
-    @PostMapping("/save/{id}")
-    public ResponseEntity<?> create(@CurrentUser UserPrincipal currentuser,
-    @PathVariable("id") long id,
-            @Valid @RequestBody SocialmediaRequest socialmediaRequest) {
-        return ResponseEntity.ok(socialmediaService.save(socialmediaRequest,id));
+    @PostMapping("/save/{id}/{cardid}")
+    public ResponseEntity<?> create(@CurrentUser UserPrincipal currentuser, @PathVariable("cardid") String cardid)
+         {
+       
+        return ResponseEntity.ok(cardService.save(currentuser.getId(), cardid));
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<?> update(@CurrentUser UserPrincipal currentuser,
-            @Valid @RequestBody SocialmediaRequest socialmediaRequest, @PathVariable("id") long id) {
-        return socialmediaService.update(id, socialmediaRequest);
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@CurrentUser UserPrincipal currentuser, @PathVariable("id") long id) {
-        return this.socialmediaService.delete(id);
+        return this.cardService.delete(id);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> listById(@CurrentUser UserPrincipal currentuser, @PathVariable("id") long id) {
-        return ResponseEntity.ok(this.socialmediaService.listById(id));
+        return ResponseEntity.ok(this.cardService.listById(id));
     }
 
 }

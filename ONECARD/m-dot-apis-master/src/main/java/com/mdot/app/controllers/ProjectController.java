@@ -22,13 +22,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/api/project")
 public class ProjectController {
-    @Autowired
+    @Autowired 
     private ProjectService projectService;
 
-    @PostMapping("/save")
-    public ResponseEntity<?> create(@CurrentUser UserPrincipal currentuser,
-            @Valid @RequestBody ProjectRequest projectRequest) {
-        return ResponseEntity.ok(projectService.save(projectRequest));
+    @PostMapping("/save/{id}/{title}/{description}")
+    public ResponseEntity<?> create(@CurrentUser UserPrincipal currentuser, @PathVariable("title") String title,
+            @PathVariable("description") String description) {
+        if (description.equals("-x"))
+            description= "";
+        return ResponseEntity.ok(projectService.save(currentuser.getId(), title, description));
     }
 
     @PatchMapping("/{id}")

@@ -24,10 +24,11 @@ public class FriendController {
     @Autowired
     private FriendService friendService;
 
-    @PostMapping("/save")
-    public ResponseEntity<?> create(@CurrentUser UserPrincipal currentuser,
-            @Valid @RequestBody FriendRequest friendRequest) {
-        return ResponseEntity.ok(friendService.save(friendRequest));
+    @PostMapping("/save/{friend}")
+    public ResponseEntity<?> create(@CurrentUser UserPrincipal currentuser, @PathVariable("friend") Long friend)
+         {
+       
+        return ResponseEntity.ok(friendService.save(currentuser.getId(), friend));
     }
 
     @PatchMapping("/{id}")

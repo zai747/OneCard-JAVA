@@ -28,7 +28,8 @@ public class UserPrincipal implements UserDetails {
 	@JsonIgnore
 	private String password;
 
-   
+    private String firstname;
+	private String lastname;   
 	private String jobtitle;
 
 	private String email;
@@ -66,7 +67,8 @@ public class UserPrincipal implements UserDetails {
 		this.id = user.getId();
 		this.username = user.getUsername();
 		this.password = user.getPassword();
-
+        this.firstname = user.getFirstname();
+		this.lastname= user.getLastname();
 		this.email = user.getEmail();
 		this.phone = user.getPhone();
 		this.description =user.getDescription();
@@ -74,18 +76,6 @@ public class UserPrincipal implements UserDetails {
 		this.usermedia = user.getUsermedia();
 		 this.profileimage = user.getProfileimage();
 		 this.projects = user.getProjects();
-		// this.gender = user.getGender();
-		// this.dob = user.getDob();
-		// this.address = user.getAddress();
-		// this.city = user.getCity();
-		// this.state = user.getState();
-		// this.country = user.getCountry();
-		// this.pin = user.getPin();
-		// this.image = user.getImage();
-		// this.creditLimit = user.getCreditLimit();
-		// this.balance = user.getBalance();
-		// this.totalPayment = user.getTotalPayment();
-		// this.stripeCustomerId = user.getStripeCustomerId();
 	
 		this.enabled = user.isEnabled();
 		// this.locked = user.isLocked();
@@ -105,6 +95,10 @@ public class UserPrincipal implements UserDetails {
 	@Override
 	public String getUsername() {
 		return username;
+	}
+	
+	public String getPhone() {
+		return phone;
 	}
 
 	@Override

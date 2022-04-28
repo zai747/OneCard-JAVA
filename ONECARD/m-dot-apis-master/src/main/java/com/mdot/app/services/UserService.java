@@ -53,6 +53,8 @@ public class UserService {
 
 			user.setId((long) 0);
 			user.setUsername(userRequest.getUsername());
+			user.setFirstname(userRequest.getFirstname());
+			user.setLastname(userRequest.getLastname());
 			user.setPhone(userRequest.getPhone());
 			user.setEmail(userRequest.getEmail());
 			user.setPassword(userRequest.getPassword());
@@ -157,10 +159,9 @@ public ResponseEntity<?> listByUsername(String username) {
 	
 				user.get().setPhone(userRequest.getPhone());
 				user.get().setEmail(userRequest.getEmail());
-				//user.get().setFirstname(userRequest.getFirstname());
-				//user.get().setLastname(userRequest.getLastname());
+				user.get().setFirstname(userRequest.getFirstname());
+				user.get().setLastname(userRequest.getLastname());
 				user.get().setJobtitle(userRequest.getJobtitle());
-	
 				user.get().setDescription(userRequest.getDescription());
 				user.get().setUsermedia(userRequest.getUsermedia());
 				user.get().setProjects(userRequest.getProjects());
@@ -211,7 +212,8 @@ public ResponseEntity<?> listByStatus(long id, String status) {
 				break;
 		}
 
-		List<User> list = this.userRepository.findByStatusAndEnabled(id, recordStatus);
+		List<User> list = this.userRepository.findByStatusAndEnabled(recordStatus,true);
+
 		return new ResponseEntity<>(new ApiResponse(true, "", list), HttpStatus.OK);
 	} catch (Exception e) {
 		return new ResponseEntity<>(new ApiResponse(false, e.toString()), HttpStatus.BAD_REQUEST);

@@ -47,6 +47,17 @@ public class User extends DateAudit {
 	@Column(name = "username", nullable = false)
 	private String username;
 
+	@NotBlank
+	@Size(max = 30)
+	@Column(name = "firstname", nullable = false)
+	private String firstname ="";
+
+
+    @NotBlank
+	@Size(max = 30)
+	@Column(name = "lastname", nullable = false)
+	private String lastname ="";
+
 
 	@JsonIgnore
 	@NotBlank
@@ -94,7 +105,7 @@ public class User extends DateAudit {
 
 	
 	@Column(name = "projects", nullable = true)
-	private String projects;
+	private String projects="";
 
 
 

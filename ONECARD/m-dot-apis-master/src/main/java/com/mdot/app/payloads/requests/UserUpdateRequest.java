@@ -6,16 +6,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserUpdateRequest {
+    private String username;
     private String phone;
     private String email;
-    private String firstname;
-    private String lastname;
-    private String gender;
-    private String dob;
     private String usermedia;
     private String profileimage;
     private String projects;
     private String jobtitle;
     private String description;
+    private String firstname;
+    private String lastname;
+
 
 }

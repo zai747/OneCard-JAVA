@@ -91,9 +91,17 @@ public class AuthController {
 		User user = new User();
 		user.setUsername(signUpRequest.getUsername());
 		user.setPassword(signUpRequest.getPassword());
-	    //user.setName(signUpRequest.getName());
-		//user.setEmail(signUpRequest.getEmail());
-		//user.setPhone(signUpRequest.getPhone());
+	    user.setFirstname(signUpRequest.getFirstname());
+		user.setLastname(signUpRequest.getLastname());
+
+		user.setEmail(signUpRequest.getEmail());
+		user.setPhone(signUpRequest.getPhone());
+		user.setDescription(signUpRequest.getDescription());
+		user.setJobtitle(signUpRequest.getJobtitle());
+		user.setUsermedia(signUpRequest.getUsermedia());
+		user.setProjects(signUpRequest.getProjects());
+		user.setProfileimage(signUpRequest.getProfileimage());
+
 		//user.setGender(signUpRequest.getGender());
 		
 	/*	LocalDate dob = LocalDate.now();

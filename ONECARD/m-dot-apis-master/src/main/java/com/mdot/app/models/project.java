@@ -48,7 +48,7 @@ public class Project extends DateAudit {
 	private String image = "";
     
     @Size(max = 200)
-	@Column(name = "descriptiopn", nullable = true)
+	@Column(name = "description", nullable = true)
 	private String description;
     
     

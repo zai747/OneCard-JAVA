@@ -10,10 +10,20 @@ import lombok.Setter;
 public class SignUpRequest {
 
 	
-	private String Username;
-	private String Password;
-	private String Name;
+	private String username;
+	private String password;
+	private String name;
 	private String email = "";
 	private String phone = "";
-	
+	private String description;
+	private String jobtitle;
+	private String usermedia;
+	private String projects;
+	private String profileimage;
+	private String firstname;
+	private String lastname;
+
+
+
+
 }

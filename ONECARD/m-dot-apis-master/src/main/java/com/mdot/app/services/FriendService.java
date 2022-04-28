@@ -7,10 +7,11 @@ import javax.validation.Valid;
 
 import com.mdot.app.models.Friend;
 import com.mdot.app.models.RecordStatus;
-import com.mdot.app.models.WideRecordStatus;
+import com.mdot.app.models.User;
 import com.mdot.app.payloads.requests.FriendRequest;
 import com.mdot.app.payloads.responses.ApiResponse;
 import com.mdot.app.repositories.FriendRepository;
+import com.mdot.app.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,23 +27,44 @@ public class FriendService {
 	@Autowired
 	private FriendRepository friendRepository;
 
+	@Autowired
+	private UserRepository userRepository;
+
     
 	@Transactional
-	public ResponseEntity<?> save(@Valid FriendRequest friendRequest) {
+	public ResponseEntity<?> save(long id, Long fid) {
 		try {
+
 			Friend friend = new Friend();
 
-			friend.setId((long) 0);
+          
+            Optional<User> user = userRepository.findById(id);
+
+			if (!user.isPresent())
+				return new ResponseEntity<>(new ApiResponse(false, "Item not found"), HttpStatus.BAD_REQUEST);
+
+				Optional<User> friendUser = userRepository.findById(fid);
+
+				if (!friendUser.isPresent())
+					return new ResponseEntity<>(new ApiResponse(false, "Item not found"), HttpStatus.BAD_REQUEST);
 		
-			friend.setStatus(RecordStatus.ACTIVE);
-			
+
+			friend.setId((long) 0);
+            friend.setUser(user.get());
+			friend.setFriend(friendUser.get());
+		
+	
+		    friend.setStatus(RecordStatus.ACTIVE);
+			friend = this.friendRepository.save(friend);
 
 			return new ResponseEntity<>(new ApiResponse(true, "Saved successfully", friend), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(new ApiResponse(false, e.toString()), HttpStatus.BAD_REQUEST);
 		}		
 
-	}
+	
+
+}
 
 @Transactional
 	public ResponseEntity<?> update(long id, @Valid FriendRequest friendRequest) {

@@ -6,20 +6,21 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SocialmediaRequest {
+  
    
- private String instagram;
+ private String instagram="";
 
- private String facebook;
+ private String facebook="";
 
- private String twitter;
+ private String twitter="";
 
- private String snapchat;
+ private String snapchat="";
 
- private String linkedin;
+ private String linkedin="";
 
- private String pinterest;
+ private String pinterest="";
 
- private String twitch;
+ private String twitch="";
  
 
 }

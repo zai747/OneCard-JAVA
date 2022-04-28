@@ -31,7 +31,7 @@ public class UserController {
         return ResponseEntity.ok(userService.save(userRequest));
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<?> list(@CurrentUser UserPrincipal currentuser) {
         return ResponseEntity.ok(this.userService.list());
     }
@@ -40,6 +40,7 @@ public class UserController {
     @PatchMapping("/{id}")
     public ResponseEntity<?> update(@CurrentUser UserPrincipal currentuser,
             @Valid @RequestBody UserUpdateRequest userRequest, @PathVariable("id") long id) {
+              //  System.out.println(currentuser.getId());
         return userService.update(id, userRequest);
     }
 
