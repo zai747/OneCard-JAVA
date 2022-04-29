@@ -25,13 +25,13 @@ public class ProjectController {
     @Autowired 
     private ProjectService projectService;
 
-    @PostMapping("/save/{id}/{title}/{description}")
-    public ResponseEntity<?> create(@CurrentUser UserPrincipal currentuser, @PathVariable("title") String title,
-            @PathVariable("description") String description) {
-        if (description.equals("-x"))
-            description= "";
-        return ResponseEntity.ok(projectService.save(currentuser.getId(), title, description));
+    @PostMapping("/save/{id}")
+    public ResponseEntity<?> create(@CurrentUser UserPrincipal currentuser,
+    @PathVariable("id") long id,
+            @Valid @RequestBody ProjectRequest projectRequest) {
+        return ResponseEntity.ok(projectService.save(projectRequest,id));
     }
+
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> update(@CurrentUser UserPrincipal currentuser,

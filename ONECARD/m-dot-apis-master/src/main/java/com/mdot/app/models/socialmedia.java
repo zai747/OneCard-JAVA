@@ -26,7 +26,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "Socialmedia", uniqueConstraints = { @UniqueConstraint(columnNames = { }), })
+@Table(name = "socialmedia", uniqueConstraints = { @UniqueConstraint(columnNames = { }), })
 @Getter
 @Setter
 @NoArgsConstructor

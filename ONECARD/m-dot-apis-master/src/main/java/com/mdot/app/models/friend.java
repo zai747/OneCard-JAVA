@@ -23,7 +23,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "Friend", uniqueConstraints = { @UniqueConstraint(columnNames = { }), })
+@Table(name = "friend", uniqueConstraints = { @UniqueConstraint(columnNames = { }), })
 @Getter
 @Setter
 @NoArgsConstructor

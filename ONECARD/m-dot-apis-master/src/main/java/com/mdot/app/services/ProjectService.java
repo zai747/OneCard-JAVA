@@ -32,26 +32,29 @@ public class ProjectService {
 
     
 	@Transactional
-	public ResponseEntity<?> save(long id, String title, String description) {
+	public ResponseEntity<?> save(@Valid 	ProjectRequest projectRequest,long id) {
 		try {
-
-			Optional<User> user = userRepository.findById(id);
-
-			if (!user.isPresent())
-				return new ResponseEntity<>(new ApiResponse(false, "Item not found"), HttpStatus.BAD_REQUEST);
 
 			Project project = new Project();
 
+            Optional<User> user = userRepository.findById(id);
+            if (!user.isPresent())
+				return new ResponseEntity<>(new ApiResponse(false, "Item not found"), HttpStatus.BAD_REQUEST);              
+
 			project.setId((long) 0);
-			project.setUser(user.get());
-			project.setTitle(title);
-			project.setDescription(description);
-			project = this.projectRepository.save(project);
+            project.setUser(user.get());
+			project.setTitle(projectRequest.getTitle());
+			project.setImage(projectRequest.getImage());
+            project.setDescription(projectRequest.getDescription());
+            
+			project.setStatus(RecordStatus.ACTIVE);
+            project = this.projectRepository.save(project);
+
 
 			return new ResponseEntity<>(new ApiResponse(true, "Saved successfully", project), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(new ApiResponse(false, e.toString()), HttpStatus.BAD_REQUEST);
-		}
+		}		
 
 	}
 
