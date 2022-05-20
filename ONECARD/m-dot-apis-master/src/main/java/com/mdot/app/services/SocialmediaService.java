@@ -5,7 +5,6 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.mdot.app.models.RecordStatus;
 import com.mdot.app.models.Socialmedia;
 import com.mdot.app.models.User;
@@ -13,7 +12,6 @@ import com.mdot.app.payloads.requests.SocialmediaRequest;
 import com.mdot.app.payloads.responses.ApiResponse;
 import com.mdot.app.repositories.SocialMediaRepository;
 import com.mdot.app.repositories.UserRepository;
-import com.mdot.app.securities.UserPrincipal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,7 +69,7 @@ public class SocialmediaService {
 			if (!socialmedia.isPresent())
 				return new ResponseEntity<>(new ApiResponse(false, "Item not found"), HttpStatus.BAD_REQUEST);
 
-                socialmedia.get().setId((long) 0);
+                
                 socialmedia.get().setInstagram(socialmediaRequest.getInstagram());
                 socialmedia.get().setFacebook(socialmediaRequest.getFacebook());
                 socialmedia.get().setTwitter(socialmediaRequest.getTwitter());

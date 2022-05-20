@@ -111,13 +111,7 @@ public class AuthController {
 			dob = LocalDate.now();
 		}*/
 		
-		/*user.setDob(dob);
-		user.setAddress(signUpRequest.getAddress());
-		user.setCity(signUpRequest.getCity());
-		user.setState(signUpRequest.getState());
-		user.setCountry(signUpRequest.getCountry());
-		user.setPin(signUpRequest.getPin());*/
-		
+	
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 
 		RoleName role = RoleName.ROLE_USER;

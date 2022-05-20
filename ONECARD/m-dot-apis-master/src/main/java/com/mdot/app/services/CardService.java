@@ -31,31 +31,28 @@ public class CardService {
 
     
 	@Transactional
-	public ResponseEntity<?> save(long id, String cardid) {
+	public ResponseEntity<?> save(@Valid 	CardRequest cardRequest,long id) {
 		try {
-          
-            Optional<User> user = userRepository.findById(id);
 
-			if (!user.isPresent())
-				return new ResponseEntity<>(new ApiResponse(false, "Item not found"), HttpStatus.BAD_REQUEST);
 			Card card = new Card();
+
+            Optional<User> user = userRepository.findById(id);
+            if (!user.isPresent())
+				return new ResponseEntity<>(new ApiResponse(false, "Item not found"), HttpStatus.BAD_REQUEST);              
 
 			card.setId((long) 0);
             card.setUser(user.get());
-			card.setCardid(cardid);
-		
-	
-		    card.setStatus(RecordStatus.ACTIVE);
+			card.setCardid(cardRequest.getCardid());
+			card.setStatus(RecordStatus.ACTIVE);
 			card = this.cardRepository.save(card);
+
 
 			return new ResponseEntity<>(new ApiResponse(true, "Saved successfully", card), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(new ApiResponse(false, e.toString()), HttpStatus.BAD_REQUEST);
 		}		
 
-	
-
-}
+	}
 
 @Transactional
 public ResponseEntity<?> delete(long id) {

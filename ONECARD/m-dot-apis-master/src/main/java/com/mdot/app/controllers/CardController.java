@@ -1,5 +1,6 @@
 package com.mdot.app.controllers;
 
+
 import javax.validation.Valid;
 
 import com.mdot.app.payloads.requests.CardRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,11 +24,11 @@ public class CardController {
     @Autowired
     private CardService cardService;
 
-    @PostMapping("/save/{id}/{cardid}")
-    public ResponseEntity<?> create(@CurrentUser UserPrincipal currentuser, @PathVariable("cardid") String cardid)
-         {
-       
-        return ResponseEntity.ok(cardService.save(currentuser.getId(), cardid));
+    @PostMapping("/save/{id}")
+    public ResponseEntity<?> create(@CurrentUser UserPrincipal currentuser,
+    @PathVariable("id") long id,
+            @Valid @RequestBody CardRequest cardRequest) {
+        return ResponseEntity.ok(cardService.save(cardRequest,id));
     }
 
 

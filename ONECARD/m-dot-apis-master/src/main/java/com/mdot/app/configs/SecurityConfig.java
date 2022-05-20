@@ -64,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/auth/signin", "/api/auth/signin/app", "/api/user/save","/api/user/usersave", "/api/auth/signup","/api/auth/signup/pos","/api/file/image/**",
 						"/api/auth/register/app", "/api/auth/isexist/**", "/api/auth/forgotpassword", "/api/auth/forgotpassword/app",
 						"/api/auth/resetpassword", "/api/auth/validateToken","/api/auth/login","/api/auth/register",
-						"/api/project/save/{id}/{title}/{description}","/api/project/my-projects/","/api/project/{id}","/api/card/save/{id}/{cardid}","/api/socialmedia/save/{id}",
+						"/api/media/save/{id}/{title}/{description}","/api/project/my-projects/","/api/media/{id}","/api/card/save/{id}/{cardid}","/api/socialmedia/save/{id}",
 						"/api/user/{id}","/api/user/image/{image}","/api/user/username/{username}","/api/user/phone/{phone}","/api/user/email/{email}","/api/user/{id}/status/{status}")
 				.permitAll().antMatchers("/api/user/checkAvailability/username", "/api/user/checkAvailability/email")
 				.permitAll().antMatchers(HttpMethod.GET, "/api/category/public/**", "/api/stock/public/**", "/api/user/show/image/**", "/api/product/suggest/**", "/api/postcode/**").permitAll()

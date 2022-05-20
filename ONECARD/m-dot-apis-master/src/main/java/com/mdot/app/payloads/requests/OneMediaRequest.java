@@ -5,13 +5,19 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProjectRequest {
-   
+public class OneMediaRequest {
+
+
+ private String user;
+  
  private String title;
 
  private String image;
 
  private String description;
+
  
 
 }
+
+

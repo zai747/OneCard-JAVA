@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProjectUpdateRequest {
+public class OneMediaUpdateRequest {
     private String title;
     private String image;
     private String description;

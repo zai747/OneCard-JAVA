@@ -1,5 +1,6 @@
 package com.mdot.app.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -74,7 +75,13 @@ public class FriendService {
 			if (!friend.isPresent())
 				return new ResponseEntity<>(new ApiResponse(false, "Item not found"), HttpStatus.BAD_REQUEST);
 
-			
+				Optional<User> user = userRepository
+                .findById(id); 
+
+        if (!user.isPresent())
+            return new ResponseEntity<>(new ApiResponse(false, "Item not found"), HttpStatus.BAD_REQUEST);
+
+			friend.get().setUser(user.get());
 			friend.get().setStatus(RecordStatus.ACTIVE);
 
 			return new ResponseEntity<>(
@@ -110,6 +117,16 @@ public ResponseEntity<?> listById(long id) {
         return new ResponseEntity<>(new ApiResponse(false, e.toString()), HttpStatus.BAD_REQUEST);
     }
 }
+
+@Transactional
+	public ResponseEntity<?> list() {
+		try {
+			List<Friend> list = this.friendRepository.findAll();
+			return new ResponseEntity<>(new ApiResponse(true, "", list), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ApiResponse(false, e.toString()), HttpStatus.BAD_REQUEST);
+		}
+	}
 }
 
 

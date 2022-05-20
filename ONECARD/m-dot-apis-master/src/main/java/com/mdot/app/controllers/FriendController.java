@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+ 
 @RestController
 @RequestMapping(path = "/api/friend")
 public class FriendController {
@@ -47,4 +47,8 @@ public class FriendController {
         return ResponseEntity.ok(this.friendService.listById(id));
     }
 
+    @GetMapping("/list")
+    public ResponseEntity<?> list(@CurrentUser UserPrincipal currentuser) {
+        return ResponseEntity.ok(this.friendService.list());
+    }
 }
