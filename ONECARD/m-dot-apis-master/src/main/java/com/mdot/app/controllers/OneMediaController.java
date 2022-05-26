@@ -47,4 +47,9 @@ public class OneMediaController {
         return ResponseEntity.ok(this.onemediaService.listById(id));
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> listByUserId(@PathVariable("id") long id) {
+        return ResponseEntity.ok(this.onemediaService.listByUserId(id));
+    }
+
 }

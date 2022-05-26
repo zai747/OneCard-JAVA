@@ -48,4 +48,8 @@ public class SocialmediaController {
         return ResponseEntity.ok(this.socialmediaService.listById(id));
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> listByUserId(@PathVariable("id") long id) {
+        return ResponseEntity.ok(this.socialmediaService.listByUserId(id));
+    }
 }

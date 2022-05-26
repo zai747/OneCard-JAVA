@@ -42,4 +42,9 @@ public class CardController {
         return ResponseEntity.ok(this.cardService.listById(id));
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> listByUserId(@PathVariable("id") long id) {
+        return ResponseEntity.ok(this.cardService.listByUserId(id));
+    }
+
 }

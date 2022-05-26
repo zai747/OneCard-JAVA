@@ -128,7 +128,12 @@ public ResponseEntity<?> listByUserId(long user_id) {
         return new ResponseEntity<>(new ApiResponse(false, e.toString()), HttpStatus.BAD_REQUEST);
     }
 }*/
-
+@Transactional
+    public ResponseEntity<?> listByUserId(long id) {
+        return new ResponseEntity<>(
+                new ApiResponse(true, "", this.onemediaRepository.findByUserIdAndStatus(id, RecordStatus.ACTIVE)),
+                HttpStatus.OK);
+    }
 
 }
 

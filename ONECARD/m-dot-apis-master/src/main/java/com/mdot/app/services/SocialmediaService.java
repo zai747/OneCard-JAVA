@@ -112,6 +112,12 @@ public ResponseEntity<?> listById(long id) {
         return new ResponseEntity<>(new ApiResponse(false, e.toString()), HttpStatus.BAD_REQUEST);
     }
 }
+@Transactional
+    public ResponseEntity<?> listByUserId(long id) {
+        return new ResponseEntity<>(
+                new ApiResponse(true, "", this.socialmediaRepository.findByUserIdAndStatus(id, RecordStatus.ACTIVE)),
+                HttpStatus.OK);
+    }
 }
 
 

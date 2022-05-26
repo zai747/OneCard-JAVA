@@ -51,4 +51,22 @@ public class FriendController {
     public ResponseEntity<?> list(@CurrentUser UserPrincipal currentuser) {
         return ResponseEntity.ok(this.friendService.list());
     }
+    @GetMapping("/{id}/status/{status}")
+    public ResponseEntity<?> listByUserAndStatus(@CurrentUser UserPrincipal currentuser,
+            @PathVariable("id") long id, @PathVariable("status") String status) {
+        return ResponseEntity.ok(this.friendService.listByUserAndStatus(id, status));
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> listByUserId(@PathVariable("id") long id) {
+        return ResponseEntity.ok(this.friendService.listByUserId(id));
+    }
 }
+
+
+
+
+
+
+
+

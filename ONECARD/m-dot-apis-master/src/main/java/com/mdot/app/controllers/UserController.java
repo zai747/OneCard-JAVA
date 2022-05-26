@@ -84,4 +84,4 @@ public class UserController {
         return ResponseEntity.ok(this.userService.listByStatus(id, status));
     }
 
-}
+}  

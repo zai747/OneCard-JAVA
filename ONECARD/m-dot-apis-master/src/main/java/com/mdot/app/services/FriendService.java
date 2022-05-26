@@ -127,8 +127,38 @@ public ResponseEntity<?> listById(long id) {
 			return new ResponseEntity<>(new ApiResponse(false, e.toString()), HttpStatus.BAD_REQUEST);
 		}
 	}
-}
 
+	@Transactional
+	public ResponseEntity<?> listByUserAndStatus(long id, String status) {
+		try {
+			RecordStatus recordStatus = RecordStatus.ACTIVE;
+
+			switch (status) {
+			case "INACTIVE":
+				recordStatus = RecordStatus.INACTIVE;
+				break;
+			case "DELETED":
+				recordStatus = RecordStatus.DELETED;
+				break;
+			default:      
+				recordStatus = RecordStatus.ACTIVE;
+				break;
+			}
+
+			List<Friend> list = this.friendRepository.findByUserIdAndStatus(id, recordStatus);
+			return new ResponseEntity<>(new ApiResponse(true, "", list), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ApiResponse(false, e.toString()), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@Transactional
+    public ResponseEntity<?> listByUserId(long id) {
+        return new ResponseEntity<>(
+                new ApiResponse(true, "", this.friendRepository.findByUserIdAndStatus(id, RecordStatus.ACTIVE)),
+                HttpStatus.OK);
+    }
+}
 
 
 

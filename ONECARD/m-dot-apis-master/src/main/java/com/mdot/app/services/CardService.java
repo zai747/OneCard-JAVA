@@ -81,7 +81,15 @@ public ResponseEntity<?> listById(long id) {
 
 
 
-}}
+}
+
+@Transactional
+    public ResponseEntity<?> listByUserId(long id) {
+        return new ResponseEntity<>(
+                new ApiResponse(true, "", this.cardRepository.findByUserIdAndStatus(id, RecordStatus.ACTIVE)),
+                HttpStatus.OK);
+    }
+}
 
 
 
