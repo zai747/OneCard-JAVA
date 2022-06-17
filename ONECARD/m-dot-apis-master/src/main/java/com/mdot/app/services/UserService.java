@@ -163,9 +163,9 @@ public ResponseEntity<?> listByUsername(String username) {
 				user.get().setLastname(userRequest.getLastname());
 				user.get().setJobtitle(userRequest.getJobtitle());
 				user.get().setDescription(userRequest.getDescription());
-				user.get().setUsermedia(userRequest.getUsermedia());
-				user.get().setProjects(userRequest.getProjects());
-				user.get().setProfileimage(userRequest.getProfileimage());
+				//user.get().setUsermedia(userRequest.getUsermedia());
+				//user.get().setProjects(userRequest.getProjects());
+				//user.get().setProfileimage(userRequest.getProfileimage());
 				user.get().setStatus(RecordStatus.ACTIVE);
 
 			

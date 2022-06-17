@@ -35,8 +35,6 @@ public class Friend extends DateAudit {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-    
-	 
 	
 
     @ManyToOne(fetch = FetchType.EAGER, optional = true)

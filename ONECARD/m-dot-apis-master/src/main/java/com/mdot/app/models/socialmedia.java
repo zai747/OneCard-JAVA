@@ -16,8 +16,6 @@ import javax.persistence.UniqueConstraint;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-
 import com.mdot.app.models.audit.DateAudit;
 
 import lombok.Getter;
@@ -48,7 +46,6 @@ public class Socialmedia extends DateAudit {
 	@Column(name = "facebook", nullable = true)
 	private String facebook;
 
-
     
     @Size(max = 200)
 	@Column(name = "twitter", nullable = true)
@@ -63,19 +60,18 @@ public class Socialmedia extends DateAudit {
 	private String linkedin;
 
     @Size(max = 200)
-	@Column(name = "pinterest", nullable = true)
-	private String pinterest;
+	@Column(name = "location", nullable = true)
+	private String location;
 
 
     @Size(max = 200)
-	@Column(name = "twitch", nullable = true)
-	private String twitch;
+	@Column(name = "website", nullable = true)
+	private String website;
     
 	@ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "user", nullable = true)
     private User user;
 
-    
 	
     @Column(name = "status", nullable = false)
 	@Enumerated(EnumType.STRING)

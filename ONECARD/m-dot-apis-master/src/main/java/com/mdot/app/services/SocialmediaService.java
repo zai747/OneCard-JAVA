@@ -48,8 +48,8 @@ public class SocialmediaService {
             socialmedia.setTwitter(socialmediaRequest.getTwitter());
             socialmedia.setSnapchat(socialmediaRequest.getSnapchat());
             socialmedia.setLinkedin(socialmediaRequest.getLinkedin());
-            socialmedia.setPinterest(socialmediaRequest.getPinterest());
-            socialmedia.setTwitch(socialmediaRequest.getTwitch());
+            socialmedia.setLocation(socialmediaRequest.getLocation());
+            socialmedia.setWebsite(socialmediaRequest.getWebsite());
 			socialmedia.setStatus(RecordStatus.ACTIVE);
             socialmedia = this.socialmediaRepository.save(socialmedia);
 
@@ -75,8 +75,8 @@ public class SocialmediaService {
                 socialmedia.get().setTwitter(socialmediaRequest.getTwitter());
                 socialmedia.get().setSnapchat(socialmediaRequest.getSnapchat());
                 socialmedia.get().setLinkedin(socialmediaRequest.getLinkedin());
-                socialmedia.get().setPinterest(socialmediaRequest.getPinterest());
-                socialmedia.get().setTwitch(socialmediaRequest.getTwitch());
+                socialmedia.get().setLocation(socialmediaRequest.getLocation());
+                socialmedia.get().setWebsite(socialmediaRequest.getWebsite());
 			    socialmedia.get().setStatus(RecordStatus.ACTIVE);
 
 			return new ResponseEntity<>(

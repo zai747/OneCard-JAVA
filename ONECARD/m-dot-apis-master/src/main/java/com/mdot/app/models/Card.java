@@ -41,6 +41,10 @@ public class Card extends DateAudit {
     @Size(max = 200)
 	@Column(name = "cardid", nullable = true)
 	private String cardid;
+
+	@Size(max = 200)
+	@Column(name = "cardurl", nullable = true)
+	private String cardurl;
     
     
     @ManyToOne(fetch = FetchType.EAGER, optional = true)

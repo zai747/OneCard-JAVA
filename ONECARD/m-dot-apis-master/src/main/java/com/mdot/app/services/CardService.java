@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-
 import com.mdot.app.models.Card;
 import com.mdot.app.models.RecordStatus;
 import com.mdot.app.models.User;
@@ -12,7 +11,6 @@ import com.mdot.app.payloads.requests.CardRequest;
 import com.mdot.app.payloads.responses.ApiResponse;
 import com.mdot.app.repositories.CardRepository;
 import com.mdot.app.repositories.UserRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +25,8 @@ public class CardService {
 	@Autowired
 	private CardRepository cardRepository;
 
-    @Autowired UserRepository userRepository;
+    @Autowired 
+    private UserRepository userRepository;
 
     
 	@Transactional
@@ -43,6 +42,7 @@ public class CardService {
 			card.setId((long) 0);
             card.setUser(user.get());
 			card.setCardid(cardRequest.getCardid());
+            card.setCardurl(cardRequest.getCardurl());
 			card.setStatus(RecordStatus.ACTIVE);
 			card = this.cardRepository.save(card);
 
@@ -89,6 +89,34 @@ public ResponseEntity<?> listById(long id) {
                 new ApiResponse(true, "", this.cardRepository.findByUserIdAndStatus(id, RecordStatus.ACTIVE)),
                 HttpStatus.OK);
     }
+
+    
+@Transactional
+public ResponseEntity<?> update(long id, @Valid CardRequest cardRequest) {
+    try {
+        Optional<Card> card = this.cardRepository.findById(id);
+
+        if (!card.isPresent())
+            return new ResponseEntity<>(new ApiResponse(false, "Item not found"), HttpStatus.BAD_REQUEST);
+
+            Optional<User> user = userRepository
+            .findById(id); 
+
+    if (!user.isPresent())
+        return new ResponseEntity<>(new ApiResponse(false, "Item not found"), HttpStatus.BAD_REQUEST);
+
+        card.get().setUser(user.get());
+        card.get().setCardid(cardRequest.getCardid());
+        card.get().setCardurl(cardRequest.getCardurl());
+        card.get().setStatus(RecordStatus.ACTIVE);
+
+        return new ResponseEntity<>(
+                new ApiResponse(true, "Updated successfully", this.cardRepository.save(card.get())),
+                HttpStatus.OK);
+    } catch (Exception e) {
+        return new ResponseEntity<>(new ApiResponse(false, e.toString()), HttpStatus.BAD_REQUEST);
+    }
+}
 }
 
 

@@ -1,11 +1,8 @@
 package com.mdot.app.services;
-
 import java.util.List;
 import java.util.Optional;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-
 import com.mdot.app.models.Friend;
 import com.mdot.app.models.RecordStatus;
 import com.mdot.app.models.User;
@@ -13,7 +10,6 @@ import com.mdot.app.payloads.requests.FriendRequest;
 import com.mdot.app.payloads.responses.ApiResponse;
 import com.mdot.app.repositories.FriendRepository;
 import com.mdot.app.repositories.UserRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

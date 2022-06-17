@@ -18,9 +18,9 @@ public class SocialmediaRequest {
 
  private String linkedin="";
 
- private String pinterest="";
+ private String location="";
 
- private String twitch="";
+ private String website="";
  
 
 }
